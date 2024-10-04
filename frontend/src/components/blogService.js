@@ -42,7 +42,7 @@ export const  updateBlog = async (id, blog) => {
 
 //DELETE
 export const deleteBlog = async (id) => {
-    const response = await fetch(`${API_URL},${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
     });
     if (!response.ok) {

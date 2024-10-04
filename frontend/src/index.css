@@ -1,0 +1,45 @@
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: light;
+}
+
+#root {
+    /* max-width: 1280px; */
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: left;
+    background-image: url('./src/assets/koreanwallpaper.jpg');
+  }
+
+button {
+/* width: 500px;
+height: 200px; */
+
+font-family: monospace;
+}
+
+.mybody {
+    display: flex;
+    gap: 2em;
+    padding: 3em;
+}
+
+.content {
+    display: flex;
+    gap: 1em;
+    padding: 3em;
+    background-color:rgb(126, 160, 226);
+}
+
+
+ul {
+    text-decoration: none;
+}
+
+input {
+    font-family: monospace;
+}
+
+#p {
+    font-size: 100rem;
+}

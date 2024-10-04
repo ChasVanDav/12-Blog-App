@@ -55,7 +55,7 @@ const BlogPosts = () => {
 
     const handleDelete = async (id) => {
         await deleteBlog(id);
-        setBlogs(blogs.filteer(blog => blog.id !== id));
+        setBlogs(blogs.filter(blog => blog.id !== id));
     };
 
     const toggleDetails = (id) => {
@@ -64,8 +64,8 @@ const BlogPosts = () => {
 
 
 return (
-<div>
-    <h1>Blogs</h1>
+<div className="content">
+    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     <form onSubmit={handleSubmit}>
         <input 
         type="text"
@@ -79,8 +79,10 @@ return (
         value={newBlog.content}
         onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value})}
         />
-    </form>
+        <button type="submit">{editBlog ? 'Update Blog' : 'Add Blog'}</button>
 
+    </form>
+    <h1>South Korea Blogs: Food, Fashion, etc</h1>
     <ul>
         {blogs.map((blog) => (
             <li key={blog.id}>
@@ -88,15 +90,19 @@ return (
                 <button onClick={() => toggleDetails(blog.id)}>
                     {detailsVisible === blog.id ? 'Hide Details' : 'Details'}
                 </button>
-
+                
+                {detailsVisible === blog.id && (
+                    <div>
+                        <p>{blog.content}</p>
+                        <button onClick={() => handleEdit(blog)}>Edit</button>
+                        <button onClick={() => handleDelete(blog.id)}>Delete</button>
+                    </div>
+                )}
             </li>
         ))}
     </ul>
-
 </div>
-
 );
-
 };
 
 export default BlogPosts;
