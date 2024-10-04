@@ -1,23 +1,14 @@
-import { useState, useEffect } from 'react'
-
+import React from 'react'
+// import BlogPosts from './components/BlogPosts';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    //fetch the message from the backend server
-    fetch('http://localhost:5000')
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => console.error(error));
-  }, []);
-
+ 
   return (
     <div>
-      <h1>{message}</h1>
+      <h1>The Land of the Morning Calm</h1>
+      {/* <BlogPosts /> */}
     </div>
   );
-
 }
 
 export default App
