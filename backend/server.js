@@ -27,7 +27,7 @@ app.get('/api/blogs', async (req,res) => {
         res.satatys(500).send("Error on Vanessa's server");
     }
 });
-//PUT route to db querying blog by id
+//GET route to db querying blog by id
 app.get('/api/blogs:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -41,6 +41,20 @@ app.get('/api/blogs:id', async (req, res) => {
         res.status(500).send("Error on Vanessa's server")
     }
 })
+//POST route adding new blog post to db
+app.post('/api/blog', async (req, res) => {
+    const { } = req.body;
+    try {
+        const newBlog = await pool.query(
+            'INSERT INTO blogs () VALUES () RETURNING *',
+            []
+        );
+        res.json(newBlog.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error on Vanessa's server");
+    }
+});
 
 //-----start the server----//
 const PORT = process.env.PORT
