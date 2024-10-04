@@ -74,6 +74,20 @@ app.put('/api/blogs:id', async (req, res) => {
 
     }
 })
+//DELETE route removing an existing blog by id
+app.delete('/api/blogs:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deleteBlog = await pool.query('DELETE FROM blogs WHERE id =$1', [id]);
+        if (deleteBlog.rowCount === 0) {
+            return res.status(404).json({ msg: 'Blog not found'});
+        }
+        res.json({ msg: 'Blog deleted'});
+    }   catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error on Vanessa's server")
+    }
+})
 
 //-----start the server----//
 const PORT = process.env.PORT
