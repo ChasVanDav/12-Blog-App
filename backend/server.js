@@ -34,7 +34,7 @@ app.get('/api/blogs', async (req,res) => {
     }
 });
 //GET route to db querying blog by id
-app.get('/api/blogs:id', async (req, res) => {
+app.get('/api/blogs/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const blog = await pool.query('SELECT * FROM blogs WHERE id = $1', [id]);
@@ -62,7 +62,7 @@ app.post('/api/blogs', async (req, res) => {
     }
 });
 //PUT route updating an exisiting blog by id
-app.put('/api/blogs:id', async (req, res) => {
+app.put('/api/blogs/:id', async (req, res) => {
     const { id } = req.params;
     const { title, content } = req.body;
     try {
@@ -75,13 +75,13 @@ app.put('/api/blogs:id', async (req, res) => {
         }
         res.json({ msg: 'Blog updated' });
     }   catch (err) {
-        console.err(err.message);
+        console.erroor(err.message);
         res.status(500).send("Error on Vanessa's server")
 
     }
 })
 //DELETE route removing an existing blog by id
-app.delete('/api/blogs:id', async (req, res) => {
+app.delete('/api/blogs/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const deleteBlog = await pool.query('DELETE FROM blogs WHERE id =$1', [id]);

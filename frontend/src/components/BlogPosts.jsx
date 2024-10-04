@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchBlogs, addBlog, updateBlog, deleteBlog } from './blogService';
 
+
 const BlogPosts = () => {
     const [blogs, setBlogs] = useState([]);
     const [newBlog, setNewBlog] = useState ({
@@ -14,8 +15,12 @@ const BlogPosts = () => {
     useEffect(() => {
         //retrieve blogs 
         const getBlogs = async () => {
+            try {
             const blogs = await fetchBlogs();
             setBlogs(blogs);
+            } catch (error) {
+                setErrorMessage(error.message);
+            }
         };
         getBlogs();
     }, []);
