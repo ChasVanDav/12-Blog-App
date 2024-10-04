@@ -8,7 +8,19 @@ export const fetchBlogs = async () => {
     return response.json();
 };
 
-export const addBlog = async () => {};
+export const addBlog = async (blog) => {
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(blog),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to add blog');
+    }
+    return response.json();
+};
 
 export const  updateBlog = async () => {};
 
