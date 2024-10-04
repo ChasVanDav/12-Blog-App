@@ -41,4 +41,12 @@ export const  updateBlog = async (id, blog) => {
 };
 
 //DELETE
-export const deleteBlog = async () => {};
+export const deleteBlog = async (id) => {
+    const response = await fetch(`${API_URL},${id}`, {
+        method: 'DELETE',
+    });
+    if (!response.ok) {
+        throw new Error('Failed to delete blog');
+    }
+    return response.json();
+};
