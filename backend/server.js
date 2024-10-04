@@ -43,11 +43,11 @@ app.get('/api/blogs:id', async (req, res) => {
 })
 //POST route adding new blog post to db
 app.post('/api/blog', async (req, res) => {
-    const { } = req.body;
+    const { title, content } = req.body;
     try {
         const newBlog = await pool.query(
-            'INSERT INTO blogs () VALUES () RETURNING *',
-            []
+            'INSERT INTO blogs (title, content) VALUES ($1, $2) RETURNING *',
+            [title, content]
         );
         res.json(newBlog.rows[0]);
     } catch (err) {
@@ -55,6 +55,25 @@ app.post('/api/blog', async (req, res) => {
         res.status(500).send("Error on Vanessa's server");
     }
 });
+//PUT route updating an exisiting blog by id
+app.put('/api/blogs:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    try {
+        const updateBlog = await pool.query(
+            'UPDATE blogs SET title = $1, content = $2 WHERE id = $3',
+            [title, content]
+        );
+        if (updateBlog.rowCount === 0) {
+            return res.status(404).json({ msg: 'Blog not found'});
+        }
+        res.json({ msg: 'Blog updated' });
+    }   catch (err) {
+        console.err(err.message);
+        res.status(500).send("Error on Vanessa's server")
+
+    }
+})
 
 //-----start the server----//
 const PORT = process.env.PORT
