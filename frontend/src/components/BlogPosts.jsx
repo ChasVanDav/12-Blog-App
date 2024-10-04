@@ -80,6 +80,19 @@ return (
         onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value})}
         />
     </form>
+
+    <ul>
+        {blogs.map((blog) => (
+            <li key={blog.id}>
+                <span>{blog.title}</span>
+                <button onClick={() => toggleDetails(blog.id)}>
+                    {detailsVisible === blog.id ? 'Hide Details' : 'Details'}
+                </button>
+
+            </li>
+        ))}
+    </ul>
+
 </div>
 
 );
