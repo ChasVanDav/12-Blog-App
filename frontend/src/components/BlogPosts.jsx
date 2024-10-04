@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchBlogs } from './blogService';
+import { fetchBlogs, addBlog, updateBlog, deleteBlog } from './blogService';
 
 const BlogPosts = () => {
     const [blogs, setBlogs] = useState([]);
