@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const { Pool } = require('pg');
 
 dotenv.config();
 
@@ -12,10 +13,15 @@ app.use(cors());
 //parses JSON data(from API responses) and returns it as a Javascript object on req.body
 app.use(express.json());
 
+//----SQL Database Connection----//
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URI
+});
+
 //----routes----//
 //root route that sends a message to the backend
 app.get('/', (req, res) => {
-    res.json({message: "hello from Vanessa's server"});
+    res.json({message: "Hello from Vanessa's server"});
 });
 //GET route to database querying all blog information
 app.get('/api/blogs', async (req,res) => {
@@ -24,7 +30,7 @@ app.get('/api/blogs', async (req,res) => {
         res.json(allBlogs.rows);
     } catch (err) {
         console.error(err.message);
-        res.satatys(500).send("Error on Vanessa's server");
+        res.status(500).send("Error on Vanessa's server");
     }
 });
 //GET route to db querying blog by id
@@ -42,7 +48,7 @@ app.get('/api/blogs:id', async (req, res) => {
     }
 })
 //POST route adding new blog post to db
-app.post('/api/blog', async (req, res) => {
+app.post('/api/blogs', async (req, res) => {
     const { title, content } = req.body;
     try {
         const newBlog = await pool.query(
@@ -82,12 +88,12 @@ app.delete('/api/blogs:id', async (req, res) => {
         if (deleteBlog.rowCount === 0) {
             return res.status(404).json({ msg: 'Blog not found'});
         }
-        res.json({ msg: 'Blog deleted'});
+        res.json({ msg: 'Blog deleted' });
     }   catch (err) {
         console.error(err.message);
         res.status(500).send("Error on Vanessa's server")
     }
-})
+});
 
 //-----start the server----//
 const PORT = process.env.PORT
