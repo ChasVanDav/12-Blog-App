@@ -88,8 +88,10 @@ const BlogPosts = () => {
     };
 
     return (
+        
         <div className="content">
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            <h2>My SoKo Life</h2>
             <form onSubmit={handleSubmit}>
     <input 
         type="text"
@@ -106,7 +108,6 @@ const BlogPosts = () => {
     />
     <button type="submit">{editBlog ? 'Update Blog' : 'Add Blog'}</button>
 </form>
-            <h2>My SoKo Life</h2>
             <ul>
                 {blogs.map((blog) => (
                     <li key={blog.id}>
