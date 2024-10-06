@@ -1,45 +1,98 @@
 * {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: light;
+    box-sizing: border-box; /* Ensures padding and border are included in element's total width and height */
 }
 
 #root {
-    /* max-width: 1280px; */
     margin: 0 auto;
     padding: 1rem;
     text-align: left;
     background-image: url('./src/assets/koreanwallpaper.jpg');
-  }
+    background-size:auto; /* Ensures the background image covers the entire area */
+    height: 100vh; /* Full height to cover the viewport */
+}
 
 button {
-/* width: 500px;
-height: 200px; */
+    font-family: monospace;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
 
-font-family: monospace;
+button:hover {
+    background-color: #555; /* Change on hover */
+    color: white; /* Change text color on hover */
 }
 
 .mybody {
     display: flex;
     gap: 2em;
     padding: 3em;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .content {
     display: flex;
+    flex-direction: column; /* Stack content vertically */
     gap: 1em;
     padding: 3em;
-    background-color:rgb(126, 160, 226);
+    background-color: rgb(126, 160, 226);
+    border-radius: 10px; /* Soft corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
 }
 
-
 ul {
-    text-decoration: none;
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+li {
+    background-color: white; /* Background for individual list items */
+    padding: 1em;
+    border-radius: 5px; /* Rounded corners for list items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for list items */
+    transition: transform 0.2s; /* Smooth transform for hover effect */
+}
+
+li:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
 }
 
 input {
     font-family: monospace;
+    padding: 10px;
+    /* margin: 15px; Spacing around inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Limit width for larger screens */
+    height: 50px;
 }
 
-#p {
-    font-size: 100rem;
+/* Media Queries for responsive design */
+@media (max-width: 600px) {
+    .mybody {
+        flex-direction: column; /* Stack content vertically on smaller screens */
+        padding: 1em; /* Less padding on smaller screens */
+    }
+    .content {
+        padding: 1em; /* Less padding */
+    }
+}
+
+textarea {
+    font-family: monospace;
+    padding: 10px;
+    margin: 5px 0; /* Spacing around textarea */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /*Rounded corners*/
+    width: 100%; /*Full width*/
+    /* max-width: 400px; Limit width for larger screens */ 
+    height: 150px; /* Set a default height */
+    resize: vertical; /* Allow only vertical resizing */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }

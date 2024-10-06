@@ -11,19 +11,22 @@ const BlogPosts = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [detailsVisible, setDetailsVisible] = useState(null);
 
+    // Fetch blogs from the server
+    const getBlogs = async () => {
+        try {
+            const blogs = await fetchBlogs();
+            setBlogs(blogs);
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
+    };
+
+    // Fetch blogs on component mount
     useEffect(() => {
-        const getBlogs = async () => {
-            try {
-                const blogs = await fetchBlogs();
-                setBlogs(blogs);
-            } catch (error) {
-                setErrorMessage(error.message);
-            }
-        };
         getBlogs();
     }, []);
 
-    // Handling PUT, POST, DELETE, and detail visibility
+    // Handle form submission for adding or updating a blog
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
@@ -37,41 +40,49 @@ const BlogPosts = () => {
         try {
             if (editBlog) {
                 // Update existing blog
-                const updatedBlog = await updateBlog(editBlog.id, newBlog);
-                setBlogs(blogs.map(blog => (blog.id === updatedBlog.id ? updatedBlog : blog)));
-                setEditBlog(null);
+                await updateBlog(editBlog.id, newBlog);
+                setEditBlog(null);  // Clear edit state
             } else {
                 // Add new blog
-                const addedBlog = await addBlog(newBlog);
-                setBlogs([...blogs, addedBlog]);
+                await addBlog(newBlog);
             }
             setNewBlog({
+                id: '',
                 title: '',
                 content: ''
             });
             setDetailsVisible(null);
+
+            // Fetch all blogs again to refresh the list
+            await getBlogs();
+
         } catch (error) {
             setErrorMessage(error.message);
         }
     };
 
+    // Handle blog edit
     const handleEdit = (blog) => {
         setEditBlog(blog);
         setNewBlog({
+            id: blog.id,
             title: blog.title,
             content: blog.content
         });
     };
 
+    // Handle blog delete
     const handleDelete = async (id) => {
         try {
             await deleteBlog(id);
-            setBlogs(blogs.filter(blog => blog.id !== id));
+            // Fetch all blogs again after deletion
+            await getBlogs();
         } catch (error) {
             setErrorMessage(error.message);
         }
     };
 
+    // Toggle details visibility
     const toggleDetails = (id) => {
         setDetailsVisible(detailsVisible === id ? null : id);
     };
@@ -79,8 +90,23 @@ const BlogPosts = () => {
     return (
         <div className="content">
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            
-            <h2>South Korea Blogs: Food, Fashion, etc</h2>
+            <form onSubmit={handleSubmit}>
+    <input 
+        type="text"
+        placeholder="Title of blog"
+        value={newBlog.title}
+        onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+    />
+    <textarea 
+        placeholder="Start typing blog content"
+        value={newBlog.content}
+        onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
+        rows="5" // Set the number of visible rows
+        style={{ resize: 'vertical' }} // Allow vertical resizing
+    />
+    <button type="submit">{editBlog ? 'Update Blog' : 'Add Blog'}</button>
+</form>
+            <h2>My SoKo Life</h2>
             <ul>
                 {blogs.map((blog) => (
                     <li key={blog.id}>
@@ -99,21 +125,6 @@ const BlogPosts = () => {
                     </li>
                 ))}
             </ul>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text"
-                    placeholder="Title"
-                    value={newBlog.title}
-                    onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
-                />
-                <input 
-                    type="text" 
-                    placeholder="Content"
-                    value={newBlog.content}
-                    onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
-                />
-                <button type="submit">{editBlog ? 'Update Blog' : 'Add Blog'}</button>
-            </form>
         </div>
     );
 };
