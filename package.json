@@ -4,6 +4,7 @@
     "supertest": "^7.0.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "start"
   }
 }
