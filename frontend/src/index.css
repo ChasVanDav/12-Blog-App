@@ -46,6 +46,7 @@ button:hover {
     width: 100%; /* Allow content to take full width */
     max-width: 800px; /* Limit maximum width for larger screens */
     margin: auto; /* Center the content */
+    font-size: 30px;
 }
 
 ul {
@@ -74,7 +75,6 @@ input {
     height: 50px;
 }
 
-/* Make textarea style consistent and responsive */
 textarea {
     font-family: monospace;
     padding: 10px;
@@ -98,3 +98,60 @@ textarea {
     }
 }
 
+/* Homepage */
+
+.homepage {
+    background-color: rgb(135, 162, 235);
+    color:antiquewhite;
+    padding: 10px 20px;
+}
+
+
+/* Navigation Bar */
+
+.navbar {
+    background-color: rgb(135, 162, 235);
+    padding: 10px 20px; /* Padding for some space around the content */
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+
+.nav-links {
+    list-style: none; /* Remove bullets from list */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox for links */
+
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space between each link */
+}
+
+.nav-links a {
+    color:darkgoldenrod;
+    text-decoration: none; /* Remove underline from links */
+    font-size: 30px; /* Increase font size */
+}
+
+.nav-links a:hover {
+    color: darkgreen; /* Change color on hover (tomato) */
+}
+
+/*
+.logo {
+    color:black;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+ .logo a {
+    color:antiquewhite;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.logo a:hover {
+    color: darkblue;
+} */

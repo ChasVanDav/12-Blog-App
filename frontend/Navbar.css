@@ -1,0 +1,45 @@
+/* Navigation Bar */
+
+.navbar {
+    background-color: rgb(135, 162, 235);
+    padding: 10px 20px; /* Padding for some space around the content */
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+
+.nav-links li {
+    margin: 0 15px; /* Space between each link */
+}
+
+.nav-links a {
+    color:darkgoldenrod;
+    text-decoration: none; /* Remove underline from links */
+    font-size: 30px; /* Increase font size */
+}
+
+.nav-links a:hover {
+    color: darkgreen; /* Change color on hover (tomato) */
+}
+
+
+.nav-links a:hover {
+    color: #ff6347; /* Change color on hover (tomato) */
+}
+
+.logo {
+    color: bisque; /* White color for the logo */
+    font-size: 40px; /* Larger font size for logo */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
+.navbar .logo a {
+    color:  bisque; /* White color for the logo link */
+    text-decoration: none; /* Remove underline from the logo link */
+    font-size: 40px; /* Larger font size for logo */
+    font-weight:normal; /* Bold text for emphasis */
+}
+
+.navbar .logo a:hover {
+    color: darkgreen;
+}
